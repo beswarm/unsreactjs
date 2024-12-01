@@ -1,0 +1,219 @@
+@import "tailwindcss/base";
+@import "tailwindcss/components";
+@import "tailwindcss/utilities";
+
+:root,
+[data-theme] {
+  background: oklch(var(--b2));
+}
+
+body {
+  min-height: 100vh;
+}
+
+h1,
+h2,
+h3,
+h4 {
+  margin-bottom: 0.5rem;
+  line-height: 1;
+}
+
+p {
+  margin: 1rem 0;
+}
+
+.btn {
+  @apply shadow-md;
+}
+
+.btn.btn-ghost {
+  @apply shadow-none;
+}
+
+@layer base {
+  body {
+    @apply bg-black text-white;
+  }
+}
+
+@layer utilities {
+  .glass-card {
+    @apply bg-white/10 backdrop-blur-lg;
+  }
+}
+
+.word-carousel {
+  @apply relative inline-block;
+  height: 1.2em;
+  vertical-align: center;
+  min-width: 220px;
+  perspective: 1200px;
+}
+
+.word-carousel-container {
+  @apply absolute w-full;
+  transform-style: preserve-3d;
+}
+
+.word-carousel-item {
+  @apply absolute left-0 w-full opacity-0;
+  backface-visibility: hidden;
+  transform-origin: 50% 50% -100px;
+  transition: all 1.2s cubic-bezier(0.645, 0.045, 0.355, 1);
+}
+
+.word-carousel-item.active {
+  @apply opacity-100;
+  transform: rotateX(0deg) translateZ(0);
+  filter: brightness(1);
+}
+
+.word-carousel-item.next {
+  transform: rotateX(-90deg) translateZ(100px);
+  filter: brightness(0.6);
+}
+
+.word-carousel-item.prev {
+  transform: rotateX(90deg) translateZ(-100px);
+  filter: brightness(0.6);
+}
+
+.web2-web3-container {
+  @apply relative flex items-center justify-center gap-8;
+  perspective: 1000px;
+}
+
+.web2-text {
+  @apply text-gray-400;
+  animation: glowPulse 3s infinite;
+}
+
+.web3-text {
+  @apply text-purple-400;
+  animation: glowPulse 3s infinite;
+}
+
+@keyframes glowPulse {
+  0%, 100% {
+    text-shadow: 0 0 5px rgba(139, 92, 246, 0.3);
+  }
+  50% {
+    text-shadow: 0 0 20px rgba(139, 92, 246, 0.6);
+  }
+}
+
+.limo-path {
+  @apply relative w-80 h-16;
+  perspective: 1000px;
+}
+
+.limo-container {
+  @apply absolute inset-0 flex items-center justify-center;
+  transform-style: preserve-3d;
+}
+
+@keyframes driveLimo {
+  0% {
+    transform: translate3d(-150%, 0, 0);
+    opacity: 0;
+  }
+   /* 20% {
+    transform: translate3d(-120%, 0, 0);
+    opacity: 0;
+    scale: 1.2;
+  } */
+  50% {
+    transform: translate3d(80%, 0, 0);
+    opacity: 1;
+    scale: 1.6;
+  }
+  /* 80% {
+    transform: translate3d(60%, 0, 0);
+    opacity: 1;
+    scale: 1.6;
+  }  */
+  100% {
+    transform: translate3d(360%, 0, 0);
+    opacity: 0.2;
+    scale: 1.4;
+  }
+}
+
+.animate-drive {
+  animation: driveLimo 6s linear infinite;
+}
+
+
+/* @keyframes roadGlow {
+  0%, 100% {
+    opacity: 0.15;
+    transform: scaleX(0.9);
+  }
+  50% {
+    opacity: 0.3;
+    transform: scaleX(1);
+  }
+} */
+
+.road-glow {
+  @apply absolute bottom-2 left-[-15%] right-[-15%] h-[6px] bg-gradient-to-r from-transparent via-purple-500 to-transparent;
+  /* @apply absolute bottom-0 left-0 right-[-10%] h-[3px] bg-gradient-to-r from-transparent via-purple-500 to-purple-500; */
+  /* animation: roadGlow 1s ease-in-out infinite; */
+  /* filter: blur(1px); */
+  margin-bottom: 4px;
+}
+
+.road-guide {
+  @apply absolute top-0 left-[-5%] right-[-10%] h-[3px] bg-gradient-to-r from-transparent via-purple-500 to-transparent;
+  /* animation: roadGlow 1s ease-in-out infinite; */
+  filter: blur(1px);
+  margin-top: 6px;
+}
+
+.road_underline {
+  position: absolute;
+}
+
+.road_underline::after {
+  content: '';
+  position: absolute;
+  left: -5%;
+  right: -5%;
+  bottom: -4px;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, #a855f7, transparent);
+  filter: blur(0.5px);
+  /* animation: textRoadGlow 1.5s linear infinite; */
+}
+
+.text-gradient {
+  @apply bg-gradient-to-r from-purple-400 via-pink-500 to-purple-600 text-transparent bg-clip-text;
+  background-size: 200% 100%;
+  animation: gradientMove 4s linear infinite;
+}
+
+@keyframes gradientMove {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+@keyframes headerCarDrive {
+  0%, 100% {
+    transform: translateX(-1px);
+  }
+  50% {
+    transform: translateX(1px);
+  }
+}
+
+.animate-header-car {
+  animation: headerCarDrive 1s ease-in-out infinite;
+}
